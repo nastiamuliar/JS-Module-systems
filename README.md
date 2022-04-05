@@ -1,7 +1,7 @@
 # JS modules
 
-##Common JS
+## Common JS
 
-##AMD
+## AMD
 
-##ES2015
+## ES2015
