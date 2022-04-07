@@ -12,29 +12,97 @@ https://exploringjs.com/es6/ch_modules.html#sec_overview-modules
 Has direct support for asynchronous loading
 
 Export: 
-* named
+* Re-exporting:
+    * Re-export everything (except for the default export):
+    ```export * from 'src/other_module';```
+    * Re-export via a clause:
+    ```export { foo as myFoo, bar } from 'src/other_module';
+
+       export { default } from 'src/other_module';
+       export { default as foo } from 'src/other_module';
+       export { foo as default } from 'src/other_module';
+    ```  
+* Named exporting via a clause:
+```
+  export { MY_CONST as FOO, myFunc };
+  export { foo as default };
+```  
+* Inline named exports:
+    * Variable declarations:
+    ```
+    export var foo;
+    export let foo;
+    export const foo;
+    ```
+    * Function declarations:
+    ```
+      export function myFunc() {}
+      export function* myGenFunc() {}
+    ```  
+    * Class declarations:
+    ```export class MyClass {}```
+* Default export:
+  * Function declarations (can be anonymous here):
   ```
-  export const sqrt = Math.sqrt;
-  export function square(x) {
-      return x * x;
-  }
+  export default function myFunc() {}
+  export default function () {}
+
+  export default function* myGenFunc() {}
+  export default function* () {}
   ```
-* default
+  * Class declarations (can be anonymous here):
   ```
-    export default function () {}
+  export default class MyClass {}
+  export default class {}
   ```
+  * Expressions: export values. Note the semicolons at the end.
+  ```
+    export default foo;
+    export default 'Hello world!';
+    export default 3 * 7;
+    export default (function () {});
+   ```
 
 Import:
-* named
-  ```
-  import { square, diag } from 'lib';
-  import * as lib from 'lib';
-  ```
   
  * default
   ```
   import myFunc from 'myFunc';
   ```
+  
+  * namespace import: imports the module as an object (with one property per named export).
+  ```
+    import * as my_lib from 'src/my_lib';
+  ```
+
+  * named
+  ```
+  import { square, diag } from 'lib';
+  ```
+  You can rename named imports:
+
+  ```
+  // Renaming: import `name1` as `localName1`
+  import { name1 as localName1, name2 } from 'src/my_lib';
+
+  // Renaming: import the default export as `foo`
+  import { default as foo } from 'src/my_lib';
+  ```
+  
+  * empty import: only loads the module, doesn’t import anything. 
+  The first such import in a program executes the body of the module.
+  
+  ```
+    import 'src/my_lib';
+  ```
+  
+There are only two ways to combine these styles and the order in which they appear is fixed; the default export always comes first.
+
+* Combining a default import with a namespace import:
+  ```import theDefault, * as my_lib from 'src/my_lib';```
+* Combining a default import with named imports
+  ```import theDefault, { name1, name2 } from 'src/my_lib';```
+  
 
 * Modules have strict mode enabled by default.
 * HTML-style comment syntax is not supported in modules, although it works in classic scripts.
