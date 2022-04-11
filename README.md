@@ -138,6 +138,7 @@ Unlike static import, dynamic import() can be used from within regular scripts. 
 Another new module-related feature is import.meta, which gives you metadata about the current module. The exact metadata you get is not specified as part of ECMAScript; it depends on the host environment.
   
 ## [Common JS](http://www.commonjs.org/)
+   https://nodejs.org/docs/latest-v10.x/api/modules.html#modules_modules
   
   Support support only synchronous loading
 
