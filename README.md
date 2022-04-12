@@ -164,5 +164,6 @@ Another new module-related feature is import.meta, which gives you metadata abou
   var diag = require('lib').diag;
   ```
 
-## AMD
+## [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md)
+   
 
