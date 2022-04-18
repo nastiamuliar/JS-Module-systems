@@ -1,4 +1,5 @@
 # JS modules
+https://auth0.com/blog/javascript-module-systems-showdown/
 
 Module is nothing more than a chunk of JavaScript code written in a file. The variables, functions in a module are not available for use unless the module file exports them.
 
