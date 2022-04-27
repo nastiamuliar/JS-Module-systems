@@ -1,6 +1,30 @@
 # JS modules
-https://auth0.com/blog/javascript-module-systems-showdown/
-https://codeguida.com/post/1303
+
+|             | CommonJS    | AMD       | ES2015    | 
+| ----------- | ----------- |-----------|-----------|
+|  define     |             | ``define(module_id /* optional */, [dependencies] /* optional */, definition function /* function for instantiating the module or object */);``||
+| use || ``require([], ()⇒{}); define((require) ⇒ {})``||
+| enviroment || server and browser ||
+| loading ||asynchronous||
+| cyclic dependencies || - ||
+| can use variables in your module specifier || ? ||
+| parsing process || ? ||
+| constructor functions || + ||
+| implementations || RequireJS||
+| live bindings || ? ||
+
+
+### Sources
+* https://github.com/amdjs/amdjs-api/blob/master/AMD.md
+* http://www.commonjs.org/
+* https://nodejs.org/docs/latest-v10.x/api/modules.html#modules_modules
+* 
+* https://auth0.com/blog/javascript-module-systems-showdown/
+* https://codeguida.com/post/1303
+* https://javascript.plainenglish.io/javascript-module-system-in-plain-english-2842ef5c76
+* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+* https://exploringjs.com/es6/ch_modules.html#sec_overview-modules
+*
 
 Module is nothing more than a chunk of JavaScript code written in a file. The variables, functions in a module are not available for use unless the module file exports them.
 
@@ -164,8 +188,5 @@ Another new module-related feature is import.meta, which gives you metadata abou
   ```
   var square = require('lib').square;
   var diag = require('lib').diag;
-  ```
-
-## [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md)
-   
+  ```   
 
