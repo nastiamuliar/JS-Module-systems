@@ -2,16 +2,24 @@
 
 |             | CommonJS    | AMD       | ES2015    | 
 | ----------- | ----------- |-----------|-----------|
-|  define     |             | ``define(module_id /* optional */, [dependencies] /* optional */, definition function /* function for instantiating the module or object */);``||
-| use || ``require([], ()⇒{}); define((require) ⇒ {})``||
-| enviroment || server and browser ||
-| loading ||asynchronous||
-| cyclic dependencies || - ||
-| can use variables in your module specifier || ? ||
-| parsing process || ? ||
-| constructor functions || + ||
-| implementations || RequireJS||
-| live bindings || ? ||
+|  define     | ``module.exports = ;`` ``exports.moduleName =``        | ``define(module_id /* optional */, [dependencies] /* optional */, definition function /* function for instantiating the module or object */);``||
+| use | ``const name = require();``  ``const { name } = require();``| ``require([], ()⇒{}); `` ``define((require) ⇒ {})``||
+| can define some module in one file ||||
+| enviroment | server | browser ||
+| loading | synchronous |asynchronous||
+| cyclic dependencies ? | + (d), - (ex) | - ||
+| can use variables in your module specifier | + | - ||
+| parsing process | single stream | algorithm split up into phases* ||
+| constructor functions | + | + ||
+| implementations | Node.js | RequireJS ||
+| live bindings | - , imports are copies of exported values | - , imports are copies of exported values ||
+
+*AMD addresses these issues by:
+
+* Register the factory function by calling define(), instead of immediately executing it.
+* Pass dependencies as an array of string values, do not grab globals.
+* Only execute the factory function once all the dependencies have been loaded and executed.
+* Pass the dependent modules as arguments to the factory function.
 
 
 ### Sources
@@ -162,31 +170,3 @@ So far we’ve only used static import. With static import, your entire module g
 Unlike static import, dynamic import() can be used from within regular scripts. It’s an easy way to incrementally start using modules in your existing code base.
   
 Another new module-related feature is import.meta, which gives you metadata about the current module. The exact metadata you get is not specified as part of ECMAScript; it depends on the host environment.
-  
-## [Common JS](http://www.commonjs.org/)
-   https://nodejs.org/docs/latest-v10.x/api/modules.html#modules_modules
-  
-  Support support only synchronous loading
-
- Export: 
-* named
-  ```
-  var sqrt = Math.sqrt;
-  function square(x) {
-      return x * x;
-  }
-  
-  module.exports = {
-    sqrt: sqrt,
-    square: square,
-  };
-  ```
-* default
-  
-  Import:
-  * named
-  ```
-  var square = require('lib').square;
-  var diag = require('lib').diag;
-  ```   
-
